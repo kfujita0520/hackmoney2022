@@ -1,0 +1,29 @@
+{
+  "name": "Bill of Lading No.1",
+  "id": "000001",
+  "date": "2022/05/21",
+  "carrier": {
+    "name" : "Shipping Company A",
+    "registrationId": "12345AA"
+  },
+  "shipper" : {
+    "name": "Car Exporter A",
+    "address": "Tokyo Japan"
+  },
+  "consignee" : {
+    "name" : "John Dorsey",
+    "address": "Harare, Zimbabwe"
+  },
+  "orderInfo" : {
+    "productName": "vehicle A",
+    "unit": "1"
+  },
+  "codPrice" : {
+    "currency" : "USD",
+    "amount" : "5000"
+  },
+  "description": null,
+  "external_link": null,
+  "image": "ipfs://bafkreigdnqqf76suibdmmbw44sjlwghywhqd42lu3gmox4gz5aztp37nhi",
+  "animation_url": null
+}
