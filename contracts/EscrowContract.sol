@@ -84,11 +84,6 @@ ReentrancyGuard
         activeDeals.push(invoice);
     }
 
-    //TODO function
-    function depositBillOfLading() external{
-        require(msg.sender == beneficiary, "Only beneficiary can deposit BL");
-    }
-
     //Ok to release the fund.
     function acceptDeal() external {
         require(msg.sender == payer, "Only payer can accept the deal");
@@ -117,10 +112,6 @@ ReentrancyGuard
         require(activeDeals.length == 0, "Only one active deal is accepted at the moment");
     }
 
-    //TODO
-    //receive BL NFT and release the fund
-    function confirmDelivery2() external {
-    }
 
     function askArbitration() external {
         require((msg.sender == payer) || (msg.sender == beneficiary), "Only payer or beneficiary can ask the arbitration to mediator");

@@ -22,24 +22,9 @@ async function main() {
 
     //await unauthorizedAccess();
 
-    let amount1000 = hre.ethers.utils.parseEther("1000");
-    await escrowA.connect(beneficiary).sendInvoice(usdToken.address, amount1000);
-    console.log("balance of escrow contract: ", await printBalance(escrowA.address));
-    await escrowA.connect(payer).depositFund();
-    console.log("balance of escrow contract: ", await printBalance(escrowA.address));
-    console.log("balance of beneficiary: ", await printBalance(beneficiary.address));
-    console.log("balance of payer: ", await printBalance(payer.address));
+    await refundByMediator();
 
 
-    await escrowA.connect(payer).askArbitration();
-    await escrowA.connect(beneficiary).askArbitration();
-    console.log((await escrowA.activeDeals(0)).status);
-
-    await escrowFactory.connect(deployer).refundByMediator(beneficiary.address, payer.address);
-    console.log("balance of escrow contract: ", await printBalance(escrowA.address));
-    console.log("balance of factory contract: ", await printBalance(escrowFactory.address));
-    console.log("balance of beneficiary: ", await printBalance(beneficiary.address));
-    console.log("balance of payer: ", await printBalance(payer.address));
 
 
 
@@ -117,6 +102,27 @@ async function unauthorizedAccess(){
     }).catch(err => {
         console.log("There must be active deal to be accepted");
     });
+}
+
+async function refundByMediator(){
+    let amount1000 = hre.ethers.utils.parseEther("1000");
+    await escrowA.connect(beneficiary).sendInvoice(usdToken.address, amount1000);
+    console.log("balance of escrow contract: ", await printBalance(escrowA.address));
+    await escrowA.connect(payer).depositFund();
+    console.log("balance of escrow contract: ", await printBalance(escrowA.address));
+    console.log("balance of beneficiary: ", await printBalance(beneficiary.address));
+    console.log("balance of payer: ", await printBalance(payer.address));
+
+
+    await escrowA.connect(payer).askArbitration();
+    await escrowA.connect(beneficiary).askArbitration();
+    console.log((await escrowA.activeDeals(0)).status);
+
+    await escrowFactory.connect(deployer).refundByMediator(beneficiary.address, payer.address);
+    console.log("balance of escrow contract: ", await printBalance(escrowA.address));
+    console.log("balance of factory contract: ", await printBalance(escrowFactory.address));
+    console.log("balance of beneficiary: ", await printBalance(beneficiary.address));
+    console.log("balance of payer: ", await printBalance(payer.address));
 }
 
 async function printBalance(signer){
